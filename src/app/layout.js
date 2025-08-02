@@ -18,6 +18,11 @@ export const metadata = {
   keywords: "iOS Developer, Swift, SwiftUI, Mobile App Development, iOS Apps, Apple Developer",
   author: "Emre Gemici",
   viewport: "width=device-width, initial-scale=1",
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({ children }) {
