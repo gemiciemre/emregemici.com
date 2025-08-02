@@ -1,13 +1,114 @@
 'use client';
 
 import Image from "next/image";
+import { useState } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
 
 export default function Home() {
   const { language, changeLanguage, t } = useLanguage();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
+  // Toggle mobile menu with animation
+  const toggleMobileMenu = () => {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu.classList.contains('mobile-menu-closed')) {
+      mobileMenu.classList.remove('mobile-menu-closed');
+      mobileMenu.classList.add('mobile-menu-open');
+      setIsMobileMenuOpen(true);
+    } else {
+      mobileMenu.classList.remove('mobile-menu-open');
+      mobileMenu.classList.add('mobile-menu-closed');
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  // Close mobile menu
+  const closeMobileMenu = () => {
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenu.classList.remove('mobile-menu-open');
+    mobileMenu.classList.add('mobile-menu-closed');
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
+      {/* CSS for animations */}
+      <style jsx global>{`
+        .mobile-menu-closed {
+          max-height: 0;
+          opacity: 0;
+          overflow: hidden;
+          transition: max-height 0.5s ease, opacity 0.3s ease;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        .mobile-menu-open {
+          max-height: 500px;
+          opacity: 1;
+          transition: max-height 0.5s ease, opacity 0.3s ease;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+        
+        /* Hamburger Animation */
+        .hamburger {
+          width: 24px;
+          height: 24px;
+          position: relative;
+          cursor: pointer;
+        }
+        
+        .hamburger-line {
+          display: block;
+          height: 2px;
+          width: 100%;
+          background: currentColor;
+          border-radius: 1px;
+          opacity: 1;
+          left: 0;
+          transform: rotate(0deg);
+          transition: .25s ease-in-out;
+          position: absolute;
+        }
+        
+        .hamburger-line:nth-child(1) {
+          top: 6px;
+        }
+        
+        .hamburger-line:nth-child(2) {
+          top: 12px;
+        }
+        
+        .hamburger-line:nth-child(3) {
+          top: 18px;
+        }
+        
+        /* When menu is open (X shape) */
+        .hamburger.open .hamburger-line:nth-child(1) {
+          top: 12px;
+          transform: rotate(135deg);
+        }
+        
+        .hamburger.open .hamburger-line:nth-child(2) {
+          opacity: 0;
+          left: -60px;
+        }
+        
+        .hamburger.open .hamburger-line:nth-child(3) {
+          top: 12px;
+          transform: rotate(-135deg);
+        }
+      `}</style>
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,24 +116,41 @@ export default function Home() {
             <div className="text-2xl font-bold text-slate-900 dark:text-white">
               Emre Gemici
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#about" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <button 
+                onClick={() => scrollToSection('about')} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
                 {t('nav.about')}
-              </a>
-              <a href="#experience" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              </button>
+              <button 
+                onClick={() => scrollToSection('experience')} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
                 {t('nav.experience')}
-              </a>
-              <a href="#projects" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              </button>
+              <button 
+                onClick={() => scrollToSection('projects')} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
                 {t('nav.projects')}
-              </a>
-              <a href="#blog" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              </button>
+              <button 
+                onClick={() => scrollToSection('blog')} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
                 {t('nav.blog')}
-              </a>
-              <a href="#contact" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
                 {t('nav.contact')}
-              </a>
+              </button>
               
-              {/* Language Toggle */}
+              {/* Desktop Language Toggle */}
               <div className="flex items-center space-x-2 ml-4">
                 <button
                   onClick={() => changeLanguage('en')}
@@ -54,6 +172,99 @@ export default function Home() {
                 >
                   TR
                 </button>
+              </div>
+            </div>
+            
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button 
+                onClick={toggleMobileMenu}
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-2"
+                aria-label="Toggle menu"
+              >
+                <div className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}>
+                  <span className="hamburger-line"></span>
+                  <span className="hamburger-line"></span>
+                  <span className="hamburger-line"></span>
+                </div>
+              </button>
+            </div>
+          </div>
+          
+          {/* Mobile Menu */}
+          <div id="mobileMenu" className="mobile-menu-closed md:hidden border-t border-slate-200 dark:border-slate-700">
+            <div className="flex flex-col space-y-4">
+              <button 
+                onClick={() => {
+                  scrollToSection('about');
+                  closeMobileMenu();
+                }} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
+                {t('nav.about')}
+              </button>
+              <button 
+                onClick={() => {
+                  scrollToSection('experience');
+                  closeMobileMenu();
+                }} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
+                {t('nav.experience')}
+              </button>
+              <button 
+                onClick={() => {
+                  scrollToSection('projects');
+                  closeMobileMenu();
+                }} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
+                {t('nav.projects')}
+              </button>
+              <button 
+                onClick={() => {
+                  scrollToSection('blog');
+                  closeMobileMenu();
+                }} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
+                {t('nav.blog')}
+              </button>
+              <button 
+                onClick={() => {
+                  scrollToSection('contact');
+                  closeMobileMenu();
+                }} 
+                className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
+                {t('nav.contact')}
+              </button>
+              
+              {/* Mobile Language Toggle */}
+              <div className="flex items-center space-x-4 pt-2">
+                <span className="text-slate-700 dark:text-slate-300">{language === 'en' ? 'Language:' : 'Dil:'}</span>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => changeLanguage('en')}
+                    className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
+                      language === 'en'
+                        ? 'bg-blue-600 text-white'
+                        : 'text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400'
+                    }`}
+                  >
+                    EN
+                  </button>
+                  <button
+                    onClick={() => changeLanguage('tr')}
+                    className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
+                      language === 'tr'
+                        ? 'bg-blue-600 text-white'
+                        : 'text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400'
+                    }`}
+                  >
+                    TR
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -83,12 +294,18 @@ export default function Home() {
               {t('hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="#projects" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+              <button 
+                onClick={() => scrollToSection('projects')} 
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors cursor-pointer"
+              >
                 {t('hero.viewWork')}
-              </a>
-              <a href="#contact" className="border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 px-8 py-3 rounded-lg font-semibold transition-colors">
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')} 
+                className="border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 px-8 py-3 rounded-lg font-semibold transition-colors cursor-pointer"
+              >
                 {t('hero.getInTouch')}
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -356,106 +573,42 @@ export default function Home() {
             </p>
           </div>
           <div className="space-y-8">
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                    iOS Developer
-                  </h3>
-                  <p className="text-blue-600 dark:text-blue-400 font-medium">
-                    Abonesepeti
+            {t('experience.experiences').map((exp, index) => {
+              const colorClasses = [
+                { bg: 'bg-blue-100 dark:bg-blue-900', text: 'text-blue-800 dark:text-blue-200', company: 'text-blue-600 dark:text-blue-400' },
+                { bg: 'bg-green-100 dark:bg-green-900', text: 'text-green-800 dark:text-green-200', company: 'text-green-600 dark:text-green-400' },
+                { bg: 'bg-purple-100 dark:bg-purple-900', text: 'text-purple-800 dark:text-purple-200', company: 'text-purple-600 dark:text-purple-400' }
+              ];
+              const colors = colorClasses[index % colorClasses.length];
+              
+              return (
+                <div key={index} className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-sm">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
+                        {exp.title}
+                      </h3>
+                      <p className={`${colors.company} font-medium`}>
+                        {exp.company}
+                      </p>
+                    </div>
+                    <span className="text-slate-600 dark:text-slate-300">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <p className="text-slate-600 dark:text-slate-300 mb-4">
+                    {exp.description}
                   </p>
+                  <div className="flex flex-wrap gap-2">
+                    {exp.skills.map((skill, skillIndex) => (
+                      <span key={skillIndex} className={`${colors.bg} ${colors.text} px-3 py-1 rounded-full text-sm`}>
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <span className="text-slate-600 dark:text-slate-300">
-                  01/2024 - Present | İstanbul, Türkiye
-                </span>
-              </div>
-              <p className="text-slate-600 dark:text-slate-300 mb-4">
-                Redesigned the entire app interface across 40+ screens, significantly enhancing usability and user engagement, 
-                resulting in a 15% increase in user retention. Developed in-app wallet features, improved onboarding flow, 
-                implemented credit card payments, integrated Pro membership experience, affiliate system, widget support, 
-                and story flow with graphical visualizations.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
-                  iOS Development
-                </span>
-                <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
-                  UI/UX Design
-                </span>
-                <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
-                  Payment Integration
-                </span>
-                <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
-                  CI/CD
-                </span>
-              </div>
-            </div>
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                    Graduate
-                  </h3>
-                  <p className="text-green-600 dark:text-green-400 font-medium">
-                    Google Game and Application Academy
-                  </p>
-                </div>
-                <span className="text-slate-600 dark:text-slate-300">
-                  11/2023 - 08/2024 | İstanbul, Türkiye
-                </span>
-              </div>
-              <p className="text-slate-600 dark:text-slate-300 mb-4">
-                Completed a comprehensive program on mobile application development, covering Flutter, project management, 
-                technology entrepreneurship, and career development. Built a Flutter-based mobile application, integrating 
-                AI-driven solutions and advanced data models to enhance decision-making and optimize business processes.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
-                  Flutter
-                </span>
-                <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
-                  AI Integration
-                </span>
-                <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
-                  Project Management
-                </span>
-              </div>
-            </div>
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                    System Administrator
-                  </h3>
-                  <p className="text-purple-600 dark:text-purple-400 font-medium">
-                    TSK (Turkish Armed Forces)
-                  </p>
-                </div>
-                <span className="text-slate-600 dark:text-slate-300">
-                  2015 - 2019 | Ankara, Turkey
-                </span>
-              </div>
-              <p className="text-slate-600 dark:text-slate-300 mb-4">
-                Managed a 1,000+ user IT system as the sole administrator, ensuring seamless operation and high availability. 
-                Operated and maintained a Data Center, overseeing critical IT infrastructure. Configured and maintained Cisco 
-                networking technologies, developed automation scripts, and improved network security and system performance.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">
-                  System Administration
-                </span>
-                <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">
-                  Cisco Technologies
-                </span>
-                <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">
-                  Data Center
-                </span>
-                <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">
-                  Automation
-                </span>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>

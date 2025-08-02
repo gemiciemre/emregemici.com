@@ -12,7 +12,7 @@ export const translations = {
     // Hero Section
     hero: {
       title: "iOS Developer",
-      description: "iOS Developer with expertise in Swift, UIKit, and SwiftUI, specializing in user-focused mobile applications. Computer Engineering graduate from Istanbul Aydın University with hands-on experience from Google Game and Application Academy. Passionate about crafting intuitive, high-quality apps that deliver exceptional user experiences.",
+      description: "Welcome to my digital space! I'm an iOS Developer who loves bringing ideas to life through Swift, UIKit, and SwiftUI. As a Computer Engineering graduate from Istanbul Aydın University, I've had the wonderful opportunity to learn and grow through the Google Game and Application Academy. My passion lies in creating mobile applications that feel natural and delightful to use – because great apps should make life easier and more enjoyable.",
       viewWork: "View My Work",
       getInTouch: "Get In Touch"
     },
@@ -38,7 +38,30 @@ export const translations = {
     // Experience Section
     experience: {
       title: "Experience",
-      subtitle: "My journey in iOS development"
+      subtitle: "My journey in iOS development",
+      experiences: [
+        {
+          title: "iOS Developer",
+          company: "Abonesepeti",
+          period: "01/2024 - Present | İstanbul, Türkiye",
+          description: "Redesigned the entire app interface across 40+ screens, significantly enhancing usability and user engagement, resulting in a 15% increase in user retention. Developed in-app wallet features, improved onboarding flow, implemented credit card payments, integrated Pro membership experience, affiliate system, widget support, and story flow with graphical visualizations.",
+          skills: ["iOS Development", "UI/UX Design", "Payment Integration", "CI/CD"]
+        },
+        {
+          title: "Graduate",
+          company: "Google Game and Application Academy",
+          period: "11/2023 - 08/2024 | İstanbul, Türkiye",
+          description: "I had the amazing opportunity to dive deep into mobile application development, exploring Flutter, project management, and technology entrepreneurship. During this journey, I built a Flutter-based mobile application that integrates AI-driven solutions and smart data models to help with decision-making and streamline business processes.",
+          skills: ["Flutter", "AI Integration", "Project Management"]
+        },
+        {
+          title: "System Administrator",
+          company: "TSK (Turkish Armed Forces)",
+          period: "2015 - 2019 | Ankara, Turkey",
+          description: "Managed a 1,000+ user IT system as the sole administrator, ensuring seamless operation and high availability. Operated and maintained a Data Center, overseeing critical IT infrastructure. Configured and maintained Cisco networking technologies, developed automation scripts, and improved network security and system performance.",
+          skills: ["System Administration", "Cisco Technologies", "Network Security", "Data Center"]
+        }
+      ]
     },
     
     // Projects Section
@@ -101,7 +124,7 @@ export const translations = {
     // Hero Section
     hero: {
       title: "iOS Developer",
-      description: "Kullanıcıların hayatına değer katan, sezgisel ve kaliteli iOS uygulamaları geliştirmeye tutkuyla bağlıyım. Swift, UIKit ve SwiftUI ile mobil deneyimleri şekillendirirken, teknik bilgimi yaratıcılıkla harmanlıyorum. İstanbul Aydın Üniversitesi Bilgisayar Mühendisliği mezunu ve Google Game and Application Academy'de edindiğim deneyimlerle, her projede kullanıcı odaklı çözümler sunuyorum.",
+      description: "Dijital dünyama hoş geldiniz! Fikirleri Swift, UIKit ve SwiftUI ile hayata geçirmeyi seven bir iOS Developer olarak, mobil uygulamalar geliştiriyorum. İstanbul Aydın Üniversitesi Bilgisayar Mühendisliği mezunu olarak, Google Game and Application Academy'de öğrenme ve gelişme fırsatı buldum. Tutkum, doğal hissettiren ve kullanmaktan keyif alınan mobil uygulamalar yaratmak – çünkü harika uygulamalar hayatı daha kolay ve keyifli hale getirmeli.",
       viewWork: "Çalışmalarımı Gör",
       getInTouch: "İletişime Geç"
     },
@@ -127,7 +150,30 @@ export const translations = {
     // Experience Section
     experience: {
       title: "Deneyim",
-      subtitle: "iOS geliştirme yolculuğum"
+      subtitle: "iOS geliştirme yolculuğum",
+      experiences: [
+        {
+          title: "iOS Developer",
+          company: "Abonesepeti",
+          period: "01/2024 - Günümüz | İstanbul, Türkiye",
+          description: "40+ ekranda tüm uygulama arayüzünü yeniden tasarlayarak kullanılabilirliği ve kullanıcı etkileşimini önemli ölçüde artırdım, bu da %15 kullanıcı tutma oranı artışı sağladı. Uygulama içi cüzdan özelliklerini geliştirdim, onboarding akışını iyileştirdim, kredi kartı ödemelerini entegre ettim, Pro üyelik deneyimini, affiliate sistemini, widget desteğini ve grafik görselleştirmelerle hikaye akışını entegre ettim.",
+          skills: ["iOS Geliştirme", "UI/UX Tasarım", "Ödeme Entegrasyonu", "CI/CD"]
+        },
+        {
+          title: "Mezun",
+          company: "Google Game and Application Academy",
+          period: "11/2023 - 08/2024 | İstanbul, Türkiye",
+          description: "Flutter, proje yönetimi, teknoloji girişimciliği ve kariyer geliştirmeyi kapsayan mobil uygulama geliştirme konusunda kapsamlı bir program tamamladım. Karar vermeyi geliştirmek ve iş süreçlerini optimize etmek için AI destekli çözümler ve gelişmiş veri modelleri entegre eden Flutter tabanlı bir mobil uygulama geliştirdim.",
+          skills: ["Flutter", "AI Entegrasyonu", "Proje Yönetimi"]
+        },
+        {
+          title: "Sistem Yöneticisi",
+          company: "TSK (Türk Silahlı Kuvvetleri)",
+          period: "2015 - 2019 | Ankara, Türkiye",
+          description: "1.000+ kullanıcılı BT sistemini tek yönetici olarak yöneterek kesintisiz işleyiş ve yüksek erişilebilirlik sağladım. Kritik BT altyapısını denetleyerek bir Veri Merkezi işlettim ve bakımını yaptım. Cisco ağ teknolojilerini yapılandırdım ve bakımını yaptım, otomasyon scriptleri geliştirdim, ağ güvenliğini ve sistem performansını iyileştirdim.",
+          skills: ["Sistem Yönetimi", "Cisco Teknolojileri", "Ağ Güvenliği", "Veri Merkezi"]
+        }
+      ]
     },
     
     // Projects Section
