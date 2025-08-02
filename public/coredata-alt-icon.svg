@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="coredataAltGradient">
+            <stop stop-color="#34C759" offset="0%"></stop>
+            <stop stop-color="#00C7BE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g>
+        <rect fill="url(#coredataAltGradient)" x="0" y="0" width="256" height="256" rx="28"></rect>
+        
+        <!-- Database Cylinders -->
+        <ellipse cx="128" cy="60" rx="70" ry="25" fill="#FFFFFF" opacity="0.9"></ellipse>
+        <ellipse cx="128" cy="128" rx="70" ry="25" fill="#FFFFFF" opacity="0.9"></ellipse>
+        <ellipse cx="128" cy="196" rx="70" ry="25" fill="#FFFFFF" opacity="0.9"></ellipse>
+        
+        <!-- Connecting Lines -->
+        <rect x="58" y="60" width="140" height="68" fill="url(#coredataAltGradient)"></rect>
+        <rect x="58" y="128" width="140" height="68" fill="url(#coredataAltGradient)"></rect>
+        
+        <!-- Entity Relationships -->
+        <circle cx="90" cy="60" r="10" fill="#34C759" stroke="#FFFFFF" stroke-width="2"></circle>
+        <circle cx="166" cy="128" r="10" fill="#34C759" stroke="#FFFFFF" stroke-width="2"></circle>
+        <circle cx="90" cy="196" r="10" fill="#34C759" stroke="#FFFFFF" stroke-width="2"></circle>
+        
+        <!-- Relationship Lines -->
+        <path d="M90,70 L90,118 L156,118 L156,128" stroke="#FFFFFF" stroke-width="3" fill="none"></path>
+        <path d="M166,138 L166,186 L100,186 L100,196" stroke="#FFFFFF" stroke-width="3" fill="none"></path>
+        
+        <!-- Core Data Text -->
+        <text x="128" y="128" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">CORE DATA</text>
+    </g>
+</svg>

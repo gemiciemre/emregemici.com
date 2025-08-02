@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="autoLayoutGradient">
+            <stop stop-color="#FF9800" offset="0%"></stop>
+            <stop stop-color="#FF5722" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g>
+        <rect fill="url(#autoLayoutGradient)" x="0" y="0" width="256" height="256" rx="28"></rect>
+        
+        <!-- Main Container -->
+        <rect x="48" y="48" width="160" height="160" rx="8" stroke="#FFFFFF" stroke-width="8" fill="none" opacity="0.9"></rect>
+        
+        <!-- Constraint Arrows -->
+        <!-- Top -->
+        <line x1="128" y1="48" x2="128" y2="68" stroke="#FFFFFF" stroke-width="4" opacity="0.9"></line>
+        <polygon points="128,48 123,58 133,58" fill="#FFFFFF" opacity="0.9"></polygon>
+        
+        <!-- Bottom -->
+        <line x1="128" y1="208" x2="128" y2="188" stroke="#FFFFFF" stroke-width="4" opacity="0.9"></line>
+        <polygon points="128,208 123,198 133,198" fill="#FFFFFF" opacity="0.9"></polygon>
+        
+        <!-- Left -->
+        <line x1="48" y1="128" x2="68" y2="128" stroke="#FFFFFF" stroke-width="4" opacity="0.9"></line>
+        <polygon points="48,128 58,123 58,133" fill="#FFFFFF" opacity="0.9"></polygon>
+        
+        <!-- Right -->
+        <line x1="208" y1="128" x2="188" y2="128" stroke="#FFFFFF" stroke-width="4" opacity="0.9"></line>
+        <polygon points="208,128 198,123 198,133" fill="#FFFFFF" opacity="0.9"></polygon>
+        
+        <!-- Inner Element -->
+        <rect x="88" y="88" width="80" height="80" rx="4" fill="#FFFFFF" opacity="0.8"></rect>
+        
+        <!-- Constraint Dots -->
+        <circle cx="88" cy="88" r="6" fill="#FFFFFF" opacity="0.9"></circle>
+        <circle cx="168" cy="88" r="6" fill="#FFFFFF" opacity="0.9"></circle>
+        <circle cx="88" cy="168" r="6" fill="#FFFFFF" opacity="0.9"></circle>
+        <circle cx="168" cy="168" r="6" fill="#FFFFFF" opacity="0.9"></circle>
+    </g>
+</svg>

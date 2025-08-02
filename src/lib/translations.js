@@ -12,7 +12,7 @@ export const translations = {
     // Hero Section
     hero: {
       title: "iOS Developer",
-      description: "iOS Developer with experience in Swift, UIKit, and SwiftUI, creating user-focused mobile apps. Graduated in Computer Engineering from Istanbul Aydın University and completed a traineeship at Google Game and Application Academy. Passionate about building intuitive and high-quality applications.",
+      description: "iOS Developer with expertise in Swift, UIKit, and SwiftUI, specializing in user-focused mobile applications. Computer Engineering graduate from Istanbul Aydın University with hands-on experience from Google Game and Application Academy. Passionate about crafting intuitive, high-quality apps that deliver exceptional user experiences.",
       viewWork: "View My Work",
       getInTouch: "Get In Touch"
     },
@@ -100,8 +100,8 @@ export const translations = {
     
     // Hero Section
     hero: {
-      title: "iOS Geliştirici",
-      description: "Swift, UIKit ve SwiftUI deneyimi olan, kullanıcı odaklı mobil uygulamalar geliştiren iOS Geliştiricisi. İstanbul Aydın Üniversitesi Bilgisayar Mühendisliği mezunu ve Google Game and Application Academy stajyeri. Sezgisel ve yüksek kaliteli uygulamalar geliştirme konusunda tutkulu.",
+      title: "iOS Developer",
+      description: "Kullanıcıların hayatına değer katan, sezgisel ve kaliteli iOS uygulamaları geliştirmeye tutkuyla bağlıyım. Swift, UIKit ve SwiftUI ile mobil deneyimleri şekillendirirken, teknik bilgimi yaratıcılıkla harmanlıyorum. İstanbul Aydın Üniversitesi Bilgisayar Mühendisliği mezunu ve Google Game and Application Academy'de edindiğim deneyimlerle, her projede kullanıcı odaklı çözümler sunuyorum.",
       viewWork: "Çalışmalarımı Gör",
       getInTouch: "İletişime Geç"
     },
@@ -109,9 +109,9 @@ export const translations = {
     // About Section
     about: {
       title: "Hakkımda",
-      subtitle: "Yenilikçi mobil çözümler geliştirme konusunda uzmanlığa sahip tutkulu iOS geliştiricisi",
-      buildingTitle: "Mobilin Geleceğini İnşa Etmek",
-      description: "Şu anda Abonesepeti'de iOS Geliştirici olarak çalışıyorum, 40+ uygulama ekranını yeniden tasarladım ve kullanıcı tutma oranını %15 artırdım. Yolculuğum Google Game and Application Academy'de kapsamlı mobil geliştirme eğitimi ve 1.000+ kullanıcılı IT sistemlerini yöneten sistem yöneticiliği geçmişimden gelen güçlü teknik temeli içeriyor.",
+      subtitle: "Kullanıcı deneyimini ön planda tutan, yenilikçi mobil çözümler geliştiren iOS Developer",
+      buildingTitle: "Mobil Deneyimleri Şekillendirmek",
+      description: "Abonesepeti'de iOS Developer olarak, kullanıcı deneyimini iyileştiren 40+ ekran tasarımı ve %15 kullanıcı tutma oranı artışı sağladım. Teknik yolculuğum, Google Game and Application Academy'deki mobil geliştirme eğitimim ve 1.000+ kullanıcılı sistemleri yönettiğim sistem yöneticiliği deneyimimle şekillendi. Bu çeşitli deneyimler, karmaşık problemlere pratik çözümler üretme yaklaşımımı güçlendiriyor.",
       approach: "Yaklaşımım",
       approachItems: [
         "SOLID prensipleri ve temiz mimari",
@@ -171,7 +171,7 @@ export const translations = {
     
     // Footer
     footer: {
-      title: "iOS Geliştirici | Bilgisayar Mühendisi",
+      title: "iOS Developer | Bilgisayar Mühendisi",
       location: "İstanbul / Türkiye",
       rights: "Tüm hakları saklıdır."
     }
