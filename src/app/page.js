@@ -35,12 +35,19 @@ export default function Home() {
     }
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    setIsMobileMenuOpen(false);
+
+    if (isMobileMenuOpen) {
+      toggleMobileMenu();
+    }
   };
 
   const experiences = t('experience.items') || [];
@@ -55,10 +62,11 @@ export default function Home() {
       
       {/* Navigation */}
       <nav 
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'py-4' : 'py-6'}`}
+        className={`fixed top-0 w-full z-50 ${isScrolled ? 'py-4' : 'py-6'}`}
         style={{ 
-          background: isScrolled ? 'var(--color-bg)' : 'transparent',
-          borderBottom: isScrolled ? '1px solid var(--color-border-light)' : 'none'
+          background: (isScrolled || isMobileMenuOpen) ? 'var(--color-bg)' : 'transparent',
+          boxShadow: (isScrolled || isMobileMenuOpen) ? '0 1px 0 var(--color-border-light)' : 'none',
+          transition: 'padding 500ms ease'
         }}
       >
         <div className="container-main">
@@ -120,7 +128,9 @@ export default function Home() {
             {/* Mobile Menu Button */}
             <button 
               className="md:hidden p-2"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={toggleMobileMenu}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMobileMenuOpen ? (
@@ -133,24 +143,62 @@ export default function Home() {
           </div>
           
           {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden pt-6 pb-4 animate-fade-in">
-              <div className="flex flex-col gap-4">
-                <button onClick={() => scrollToSection('about')} className="nav-link text-left text-lg">
-                  {t('nav.about')}
-                </button>
-                <button onClick={() => scrollToSection('experience')} className="nav-link text-left text-lg">
-                  {t('nav.experience')}
-                </button>
-                <button onClick={() => scrollToSection('projects')} className="nav-link text-left text-lg">
-                  {t('nav.projects')}
-                </button>
-                <button onClick={() => scrollToSection('contact')} className="nav-link text-left text-lg">
-                  {t('nav.contact')}
-                </button>
+          <div 
+            id="mobile-menu"
+            className={`md:hidden mobile-menu-panel ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}
+            style={{ background: 'var(--color-bg)', borderTop: '1px solid var(--color-border-light)' }}
+          >
+            <div className="flex flex-col gap-4 py-4">
+              <button onClick={() => scrollToSection('about')} className="nav-link text-left text-lg">
+                {t('nav.about')}
+              </button>
+              <button onClick={() => scrollToSection('experience')} className="nav-link text-left text-lg">
+                {t('nav.experience')}
+              </button>
+              <button onClick={() => scrollToSection('projects')} className="nav-link text-left text-lg">
+                {t('nav.projects')}
+              </button>
+              <button onClick={() => scrollToSection('contact')} className="nav-link text-left text-lg">
+                {t('nav.contact')}
+              </button>
+              
+              <div className="pt-4" style={{ borderTop: '1px solid var(--color-border-light)' }}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-sm">
+                    <button
+                      onClick={() => changeLanguage('en')}
+                      className={`px-3 py-1 rounded transition-all ${language === 'en' ? 'font-medium' : 'opacity-50'}`}
+                    >
+                      EN
+                    </button>
+                    <span style={{ color: 'var(--color-text-tertiary)' }}>/</span>
+                    <button
+                      onClick={() => changeLanguage('tr')}
+                      className={`px-3 py-1 rounded transition-all ${language === 'tr' ? 'font-medium' : 'opacity-50'}`}
+                    >
+                      TR
+                    </button>
+                  </div>
+                  
+                  <button
+                    onClick={toggleDarkMode}
+                    className="p-2 rounded-full transition-all hover:opacity-70"
+                    style={{ background: 'transparent', border: '1px solid var(--color-border-light)' }}
+                  >
+                    {isDark ? (
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    ) : (
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </nav>
 
@@ -172,14 +220,14 @@ export default function Home() {
                 {t('hero.subtitle')}
               </p>
               
-              <div className="flex flex-wrap gap-4 mb-12 lg:mb-0">
-                <button onClick={() => scrollToSection('projects')} className="btn-primary">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 lg:mb-0">
+                <button onClick={() => scrollToSection('projects')} className="btn-primary w-full sm:w-auto">
                   {t('hero.cta1')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </button>
-                <button onClick={() => scrollToSection('contact')} className="btn-secondary">
+                <button onClick={() => scrollToSection('contact')} className="btn-secondary w-full sm:w-auto">
                   {t('hero.cta2')}
                 </button>
               </div>
@@ -189,7 +237,7 @@ export default function Home() {
             <div className="lg:col-span-5 order-1 lg:order-2">
               <div className="flex flex-col items-center lg:items-end gap-8">
                 {/* Profile Image */}
-                <div className="profile-frame">
+                <div className="profile-frame w-[180px] sm:w-[260px] lg:w-[320px]">
                   <div className="profile-image-wrapper">
                     <Image 
                       src="/EmreGemici-PP2.jpeg"
@@ -203,11 +251,11 @@ export default function Home() {
                 </div>
                 
                 {/* Stats */}
-                <div className="flex gap-8 lg:gap-12">
+                <div className="flex flex-nowrap justify-center md:justify-end gap-4 md:gap-8 lg:gap-12 w-full">
                   {t('about.stats')?.slice(0, 3).map((stat, index) => (
-                    <div key={index} className="stat-card text-center lg:text-right">
-                      <div className="stat-value text-2xl lg:text-3xl">{stat.value}</div>
-                      <div className="stat-label text-xs">{stat.label}</div>
+                    <div key={index} className="stat-card text-center lg:text-right flex-[0_1_96px] sm:flex-[0_1_110px] min-w-0">
+                      <div className="stat-value text-xl sm:text-2xl lg:text-3xl">{stat.value}</div>
+                      <div className="stat-label text-[10px] sm:text-xs">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -261,11 +309,14 @@ export default function Home() {
             
             <div className="space-y-0">
               {experiences.map((exp, index) => (
-                <div key={index} className="experience-item">
+                <div key={index} className="experience-item-mobile">
                   <div>
                     <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-2">
                       <h3 className="text-title">{exp.company}</h3>
                       <span className="text-small" style={{ color: 'var(--color-text-tertiary)' }}>{exp.role}</span>
+                    </div>
+                    <div className="text-small mb-2 md:hidden" style={{ color: 'var(--color-text-tertiary)' }}>
+                      {exp.period}
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {exp.tags.map((tag, tagIndex) => (
@@ -273,7 +324,7 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                  <div className="text-small" style={{ color: 'var(--color-text-tertiary)' }}>
+                  <div className="hidden md:block text-small" style={{ color: 'var(--color-text-tertiary)' }}>
                     {exp.period}
                   </div>
                 </div>
@@ -401,7 +452,7 @@ export default function Home() {
               </a>
             </div>
             
-            <div className="flex gap-6">
+            <div className="flex flex-wrap gap-4 sm:gap-6">
               <a 
                 href="https://linkedin.com/in/emre-gemici"
                 target="_blank"
@@ -447,7 +498,14 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8" style={{ background: 'var(--color-bg-dark)', color: 'white' }}>
+      <footer 
+        className="py-8" 
+        style={{ 
+          background: 'var(--color-bg-dark)', 
+          color: 'white',
+          paddingBottom: 'calc(32px + env(safe-area-inset-bottom))'
+        }}
+      >
         <div className="container-main">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
@@ -460,6 +518,7 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <div className="md:hidden" style={{ height: 'calc(env(safe-area-inset-bottom) + 96px)' }} aria-hidden="true" />
       </footer>
     </div>
   );
