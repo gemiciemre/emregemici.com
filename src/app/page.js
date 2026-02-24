@@ -240,7 +240,7 @@ export default function Home() {
                 <div className="profile-frame w-[180px] sm:w-[260px] lg:w-[320px]">
                   <div className="profile-image-wrapper">
                     <Image 
-                      src="/EmreGemici-PP2.jpeg"
+                      src="/EmreGemici-PP3.png"
                       alt="Emre Gemici"
                       width={320}
                       height={400}
