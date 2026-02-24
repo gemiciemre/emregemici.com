@@ -4,7 +4,7 @@ import { LanguageProvider } from "@/hooks/useLanguage";
 export const metadata = {
   metadataBase: new URL('https://emregemici.com'),
   title: {
-    default: "Emre Gemici | Senior iOS Developer",
+    default: "Emre Gemici | iOS Developer",
     template: "%s | Emre Gemici"
   },
   description: "Senior iOS Developer specializing in Swift, SwiftUI, and Clean Architecture. Building high-performance mobile applications with 40+ screens redesigned and 15% user retention improvement.",
