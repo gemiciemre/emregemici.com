@@ -237,13 +237,15 @@ export default function Home() {
             <div className="lg:col-span-5 order-1 lg:order-2">
               <div className="flex flex-col items-center lg:items-end gap-8">
                 {/* Profile Image */}
-                <div className="profile-frame w-[180px] sm:w-[260px] lg:w-[320px]">
+                <div className="profile-frame w-[300px] sm:w-[380px] lg:w-[480px]">
                   <div className="profile-image-wrapper">
                     <Image 
-                      src="/EmreGemici-PP3.png"
+                      src="/EmreGemiciPP.png"
                       alt="Emre Gemici"
-                      width={320}
-                      height={400}
+                      width={3024}
+                      height={2420}
+                      sizes="(max-width: 639px) 300px, (max-width: 1023px) 380px, 480px"
+                      unoptimized
                       className="profile-image"
                       priority
                     />

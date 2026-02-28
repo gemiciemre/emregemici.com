@@ -467,8 +467,7 @@ body {
 .profile-image {
   width: 100%;
   height: auto;
-  aspect-ratio: 3/4;
-  object-fit: cover;
+  object-fit: contain;
   filter: grayscale(100%);
   transition: filter var(--transition-slow);
 }
@@ -479,25 +478,21 @@ body {
 
 .profile-image-wrapper {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .profile-image-wrapper::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: linear-gradient(
     180deg,
-    transparent 0%,
-    transparent 70%,
+    transparent 52%,
     var(--color-bg) 100%
   );
   z-index: 1;
   pointer-events: none;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 .profile-frame {
