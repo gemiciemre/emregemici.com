@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# emregemici.com
 
-## Getting Started
+Personal portfolio of Emre Gemici, iOS Developer. Single-page site built with
+Next.js 15 (App Router), React 19 and Tailwind CSS 4, deployed on Vercel.
 
-First, run the development server:
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (also generates OG images, icons, sitemap)
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+src/
+  app/
+    [lang]/            # one static page per locale: / (en) and /tr
+      layout.js        # fonts (next/font), metadata, hreflang, theme bootstrap
+      page.js          # the page itself (server component)
+      opengraph-image.js / twitter-image.js   # generated social preview per locale
+    icon.js, apple-icon.js                    # generated "EG" favicon / touch icon
+    robots.js, sitemap.js
+    globals.css        # design tokens (light/dark) and component styles
+  components/
+    SiteNav.js         # client component: menu, theme toggle, language switch
+    Monogram.js        # shared favicon artwork
+  lib/
+    translations.js    # all copy, per locale
+    site.js            # locale-independent data: URLs, socials, projects, tech stack
+    i18n.js            # locale list and helpers
+    assets.js          # reads build-time assets (fonts, OG photo)
+  middleware.js        # locale detection for "/" (cookie → Accept-Language)
+  assets/
+    fonts/             # subset TTFs used only by the generated images
+    profile-og.png     # grayscale photo used only by the OG image
+public/images/         # hero photo and project logos
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Localisation
 
-## Learn More
+- English is served at `/`, Turkish at `/tr` (both statically generated).
+- A first visit to `/` from a browser that prefers Turkish is redirected to `/tr`.
+  Choosing a language in the header stores a `NEXT_LOCALE` cookie that wins over
+  the browser preference. `/en` permanently redirects to `/`.
+- `<html lang>` is set per locale, so CSS `text-transform: uppercase` follows
+  Turkish casing rules (İ/ı). Tech names are wrapped in `lang="en"` to keep
+  English casing.
+- To change copy, edit `src/lib/translations.js`; non-text project data lives in
+  `src/lib/site.js`.
 
-To learn more about Next.js, take a look at the following resources:
+## Generated images
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`opengraph-image.js`, `icon.js` and `apple-icon.js` render with `next/og` at
+build time. They use the subset fonts in `src/assets/fonts` (Basic Latin +
+Turkish letters, fetched from the Google Fonts CSS API with a `text=` parameter).
+If new characters are needed in the OG image, re-fetch the fonts with a wider
+character set.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Analytics
 
-## Deploy on Vercel
+Visitor statistics come from [Vercel Web Analytics](https://vercel.com/docs/analytics)
+(`<Analytics />` in the root layout). It is cookieless, so no consent banner is
+needed. Enable it once for the project in the Vercel dashboard (Analytics tab);
+until then the script is a no-op.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Theme
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Light/dark follows `prefers-color-scheme`; a manual choice is stored in
+`localStorage` (`theme`) and applied by an inline script in the root layout
+before first paint, so there is no flash of the wrong theme.
