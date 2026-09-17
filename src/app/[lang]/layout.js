@@ -61,6 +61,9 @@ export async function generateMetadata({ params }) {
       title: meta.title,
       description: meta.description,
     },
+    verification: {
+      google: "9eWlrCoaqpZvZBo4sC00Rzka6xCSyufucBADBkG8lzE",
+    },
     robots: {
       index: true,
       follow: true,
